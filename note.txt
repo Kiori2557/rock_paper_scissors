@@ -1,0 +1,5 @@
+get an input from player which have to be (rock,paper,scissors)
+make a function that return (rock,paper,scissors)
+make a function of a game where u compare the input from player and return value from function
+and based on the comparison console.log the result of the game
+make a function that play the game 5 times and keep the scores of each game 
