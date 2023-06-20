@@ -1,5 +1,5 @@
 //function to randomly output rock,paper,scissors array
-function computerChoice() {
+function computerMoves() {
   let moves = ["rock", "paper", "scissors"];
   return moves[Math.floor(Math.random() * 3)];
 }
@@ -7,8 +7,8 @@ function computerChoice() {
 let score = 0;
 let roundScore = 0;
 let playerChoice = "";
-function startTheRound(playerChoice, computerMoves) {
-  console.log(`Computer chose ${computerMoves}`);
+function playARound(playerChoice, computerChoice) {
+  console.log(`Computer chose ${computerChoice}`);
   console.log(`You chose ${playerChoice}`);
   roundScore = 0;
   let gameStatus = "";
@@ -20,7 +20,7 @@ function startTheRound(playerChoice, computerMoves) {
     playerChoice == null
   ) {
     if (playerChoice == "rock") {
-      switch (computerMoves) {
+      switch (computerChoice) {
         case "rock":
           gameStatus = "Draw";
           break;
@@ -34,7 +34,7 @@ function startTheRound(playerChoice, computerMoves) {
           break;
       }
     } else if (playerChoice == "paper") {
-      switch (computerMoves) {
+      switch (computerChoice) {
         case "rock":
           gameStatus = "Congrats!!, U won!";
           roundScore += 1;
@@ -48,7 +48,7 @@ function startTheRound(playerChoice, computerMoves) {
           break;
       }
     } else if (playerChoice == "scissors") {
-      switch (computerMoves) {
+      switch (computerChoice) {
         case "rock":
           gameStatus = "Opps, u lose";
           roundScore -= 1;
@@ -71,8 +71,8 @@ function startTheRound(playerChoice, computerMoves) {
 function startTheGame() {
   for (i = 0; i < 5; i++) {
     playerChoice = prompt("what is ur move? ").toLowerCase();
-    let computerMoves = computerChoice();
-    startTheRound(playerChoice, computerMoves);
+    let computerChoice = computerMoves();
+    playARound(playerChoice, computerChoice);
     score += roundScore;
     console.log(score);
   }

@@ -3,3 +3,18 @@ make a function that return (rock,paper,scissors)
 make a function of a game where u compare the input from player and return value from function
 and based on the comparison console.log the result of the game
 make a function that play the game 5 times and keep the scores of each game 
+
+
+make a function(computerMoves) that randomly return (rock,paper,scissors)
+    -store it in a variable (computerMoves)
+
+make a score variable(score)
+
+make another function(playARound) that take player input(one of rock,paper,scissors)
+    -store it in a variable (playerChoice)
+    -declare a roundScore variable(roundScore)
+    -compare computerMoves and playerChoice, console log the result and change the roundScore according to the result
+
+make another function(startTheGame) that loop the playARound function 5 times --only loop when the player input is one of (rock,paper,scissors)
+    -change score variable according to roundScore of each loop
+    -stop asking for player input after 5 rounds
