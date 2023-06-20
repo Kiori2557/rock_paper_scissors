@@ -44,7 +44,7 @@ function playARound(playerChoice, computerChoice) {
           roundScore += 1;
           break;
         case "paper":
-          gameStatus = "Draw";
+          roundStatus = "Draw";
           break;
         case "scissors":
           roundStatus = "Opps, u lose";
@@ -62,7 +62,7 @@ function playARound(playerChoice, computerChoice) {
           roundScore += 1;
           break;
         case "scissors":
-          roundScore = "Draw";
+          roundStatus = "Draw";
           break;
       }
     }
