@@ -14,8 +14,8 @@ function playARound(playerChoice, computerChoice) {
   computerChoice = computerMoves();
   roundScore = 0;
 
-  console.log(playerChoice);
-  console.log(computerChoice);
+  console.log(`u chose ${playerChoice}`);
+  console.log(`Computer chose ${computerChoice}`);
   //Comparison and result of the round
   if (
     playerChoice == "rock" ||
@@ -23,59 +23,31 @@ function playARound(playerChoice, computerChoice) {
     playerChoice == "scissors" ||
     playerChoice == null
   ) {
-    if (playerChoice == "rock") {
-      switch (computerChoice) {
-        case "rock":
-          roundStatus = "Draw";
-          break;
-        case "paper":
-          roundStatus = "Opps, u lose";
-          roundScore -= 1;
-          break;
-        case "scissors":
-          roundStatus = "Congrats!!, U won!";
-          roundScore += 1;
-          break;
-      }
-    } else if (playerChoice == "paper") {
-      switch (computerChoice) {
-        case "rock":
-          roundStatus = "Congrats!!, U won!";
-          roundScore += 1;
-          break;
-        case "paper":
-          roundStatus = "Draw";
-          break;
-        case "scissors":
-          roundStatus = "Opps, u lose";
-          roundScore -= 1;
-          break;
-      }
-    } else if (playerChoice == "scissors") {
-      switch (computerChoice) {
-        case "rock":
-          roundStatus = "Opps, u lose";
-          roundScore -= 1;
-          break;
-        case "paper":
-          roundStatus = "Congrats!!, U won!";
-          roundScore += 1;
-          break;
-        case "scissors":
-          roundStatus = "Draw";
-          break;
-      }
+    if (playerChoice == computerChoice) {
+      roundStatus = "Draw";
+    } else if (
+      (playerChoice == "rock" && computerChoice == "scissors") ||
+      (playerChoice == "paper" && computerChoice == "rock") ||
+      (playerChoice == "scissors" && computerChoice == "paper")
+    ) {
+      roundScore++;
+      roundStatus = "Congrats!, U won!🎉";
+    } else {
+      roundScore--;
+      roundStatus = "Opps, u lost!😬";
     }
-    console.log(roundScore);
   }
 }
 
 function playTheGame() {
   let i = 0;
+
+  //loop to let player play 5 rounds
   while (i < 5) {
     let playerChoice = "";
     playerChoice = prompt("what is ur play? ");
 
+    //Loop to ask for input again if the input is not one of (rock,paper,scissors) or misspelled
     while (
       !(
         playerChoice == "rock" ||
@@ -85,6 +57,7 @@ function playTheGame() {
     ) {
       playerChoice = prompt("what is ur play? ").toLowerCase();
     }
+
     if (
       playerChoice == "rock" ||
       playerChoice == "paper" ||
@@ -92,8 +65,8 @@ function playTheGame() {
     ) {
       playARound(playerChoice, computerChoice);
       score += roundScore;
-      console.log(`Total score: ${score}`);
       console.log(`${roundStatus}`);
+      console.log(`Total score: ${score}`);
       i++;
     }
   }
