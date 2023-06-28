@@ -19,13 +19,13 @@ function computerChoice() {
   return availableMoves[Math.floor(Math.random() * 3)];
 }
 
-rock.addEventListener("click", (e) => {
+rock.addEventListener("click", () => {
   playerChoice = "rock";
 });
-paper.addEventListener("click", (e) => {
+paper.addEventListener("click", () => {
   playerChoice = "paper";
 });
-scissors.addEventListener("click", (e) => {
+scissors.addEventListener("click", () => {
   playerChoice = "scissors";
 });
 
