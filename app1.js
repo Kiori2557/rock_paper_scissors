@@ -63,14 +63,18 @@ function playTheGame() {
     console.log(`${roundStatus}`);
   }
 }
+if (playerScore == 5 || computerScore == 5) {
+  console.log("game end");
+}
+
 btns.forEach((btn) =>
   btn.addEventListener("click", () => {
-    if (playerScore < 5 && computerScore < 5) {
-      playTheGame(playerChoice, computerChoice);
-    } else if (playerScore === 5) {
-      console.log("U Won!!");
+    if (playerScore >= 5) {
+      console.log("U won");
+    } else if (computerScore >= 5) {
+      console.log("u lose");
     } else {
-      console.log("U Lose");
+      playTheGame(playerChoice, computerChoice);
     }
   })
 );
