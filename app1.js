@@ -1,74 +1,76 @@
+let playerScore = 0;
+let computerScore = 0;
+let roundStatus = "";
+let rock = document.querySelector("#rock");
+let paper = document.querySelector("#paper");
+let scissors = document.querySelector("#scissors");
+let btns = document.querySelectorAll("button");
+let playerChoice = "";
+let winner = "";
+
 //function to randomly output rock,paper,scissors array
-function computerMoves() {
+function computerChoice() {
   let availableMoves = ["rock", "paper", "scissors"];
   return availableMoves[Math.floor(Math.random() * 3)];
 }
 
-let score = 0;
-let computerChoice = "";
-let roundScore = 0;
-let roundStatus = "";
+rock.addEventListener("click", (e) => {
+  playerChoice = "rock";
+});
+paper.addEventListener("click", (e) => {
+  playerChoice = "paper";
+});
+scissors.addEventListener("click", (e) => {
+  playerChoice = "scissors";
+});
 
 //function to play a round
-function playARound(playerChoice, computerChoice) {
-  computerChoice = computerMoves();
-  roundScore = 0;
-
-  console.log(`u chose ${playerChoice}`);
-  console.log(`Computer chose ${computerChoice}`);
+function playARound(player, computer) {
+  console.log(`u chose ${player}`);
+  console.log(`Computer chose ${computer}`);
   //Comparison and result of the round
   if (
-    playerChoice == "rock" ||
-    playerChoice == "paper" ||
-    playerChoice == "scissors" ||
-    playerChoice == null
+    player == "rock" ||
+    player == "paper" ||
+    player == "scissors" ||
+    player == null
   ) {
-    if (playerChoice == computerChoice) {
+    if (player == computer) {
       roundStatus = "Draw";
     } else if (
-      (playerChoice == "rock" && computerChoice == "scissors") ||
-      (playerChoice == "paper" && computerChoice == "rock") ||
-      (playerChoice == "scissors" && computerChoice == "paper")
+      (player == "rock" && computer == "scissors") ||
+      (player == "paper" && computer == "rock") ||
+      (player == "scissors" && computer == "paper")
     ) {
-      roundScore++;
+      playerScore++;
       roundStatus = "Congrats!, U won!🎉";
     } else {
-      roundScore--;
+      computerScore++;
       roundStatus = "Opps, u lost!😬";
     }
   }
 }
 
 function playTheGame() {
-  let i = 0;
-
-  //loop to let player play 5 rounds
-  while (i < 5) {
-    let playerChoice = "";
-    playerChoice = prompt("what is ur play? ");
-
-    //Loop to ask for input again if the input is not one of (rock,paper,scissors) or misspelled
-    while (
-      !(
-        playerChoice == "rock" ||
-        playerChoice == "paper" ||
-        playerChoice == "scissors"
-      )
-    ) {
-      playerChoice = prompt("what is ur play? ").toLowerCase();
-    }
-
-    if (
-      playerChoice == "rock" ||
-      playerChoice == "paper" ||
-      playerChoice == "scissors"
-    ) {
-      playARound(playerChoice, computerChoice);
-      score += roundScore;
-      console.log(`${roundStatus}`);
-      console.log(`Total score: ${score}`);
-      i++;
-    }
+  if (
+    playerChoice == "rock" ||
+    playerChoice == "paper" ||
+    playerChoice == "scissors"
+  ) {
+    playARound(playerChoice, computerChoice());
+    console.log(`Player score: ${playerScore}`);
+    console.log(`Computer score: ${computerScore}`);
+    console.log(`${roundStatus}`);
   }
 }
-playTheGame();
+btns.forEach((btn) =>
+  btn.addEventListener("click", () => {
+    if (playerScore < 5 && computerScore < 5) {
+      playTheGame(playerChoice, computerChoice);
+    } else if (playerScore === 5) {
+      console.log("U Won!!");
+    } else {
+      console.log("U Lose");
+    }
+  })
+);
