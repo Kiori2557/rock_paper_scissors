@@ -1,12 +1,17 @@
 let playerScore = 0;
 let computerScore = 0;
-let roundStatus = "";
-let rock = document.querySelector("#rock");
-let paper = document.querySelector("#paper");
-let scissors = document.querySelector("#scissors");
-let btns = document.querySelectorAll("button");
 let playerChoice = "";
 let winner = "";
+
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+const btns = document.querySelectorAll("button");
+const result = document.querySelector("#result");
+const roundStatus = document.querySelector("#roundStatus");
+const playerPick = document.querySelector("#playerPick");
+const computerPick = document.querySelector("#computerPick");
+const score = document.querySelector("#score");
 
 //function to randomly output rock,paper,scissors array
 function computerChoice() {
@@ -26,28 +31,22 @@ scissors.addEventListener("click", (e) => {
 
 //function to play a round
 function playARound(player, computer) {
-  console.log(`u chose ${player}`);
-  console.log(`Computer chose ${computer}`);
+  playerPick.textContent = `You chose - ${player}`;
+  computerPick.textContent = `Computer chose - ${computer}`;
+
   //Comparison and result of the round
-  if (
-    player == "rock" ||
-    player == "paper" ||
-    player == "scissors" ||
-    player == null
+  if (player == computer) {
+    roundStatus.textContent = "Draw";
+  } else if (
+    (player == "rock" && computer == "scissors") ||
+    (player == "paper" && computer == "rock") ||
+    (player == "scissors" && computer == "paper")
   ) {
-    if (player == computer) {
-      roundStatus = "Draw";
-    } else if (
-      (player == "rock" && computer == "scissors") ||
-      (player == "paper" && computer == "rock") ||
-      (player == "scissors" && computer == "paper")
-    ) {
-      playerScore++;
-      roundStatus = "Congrats!, U won!🎉";
-    } else {
-      computerScore++;
-      roundStatus = "Opps, u lost!😬";
-    }
+    playerScore++;
+    roundStatus.textContent = "Congrats!, U won!🎉";
+  } else {
+    computerScore++;
+    roundStatus.textContent = "Opps, u lost!😬";
   }
 }
 
@@ -58,23 +57,21 @@ function playTheGame() {
     playerChoice == "scissors"
   ) {
     playARound(playerChoice, computerChoice());
-    console.log(`Player score: ${playerScore}`);
-    console.log(`Computer score: ${computerScore}`);
-    console.log(`${roundStatus}`);
+    score.textContent = `Player: ${playerScore} | Computer: ${computerScore}`;
   }
-}
-if (playerScore == 5 || computerScore == 5) {
-  console.log("game end");
 }
 
 btns.forEach((btn) =>
   btn.addEventListener("click", () => {
-    if (playerScore >= 5) {
-      console.log("U won");
-    } else if (computerScore >= 5) {
-      console.log("u lose");
-    } else {
+    if (playerScore < 5 && computerScore < 5) {
       playTheGame(playerChoice, computerChoice);
+      if (playerScore == 5) {
+        result.textContent = "u won";
+        btns.forEach((btn) => btn.setAttribute("hidden", ""));
+      } else if (computerScore == 5) {
+        result.textContent = "u lose";
+        btns.forEach((btn) => btn.setAttribute("hidden", ""));
+      }
     }
   })
 );
